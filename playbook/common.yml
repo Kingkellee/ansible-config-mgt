@@ -24,3 +24,30 @@
       apt:
         name: wireshark
         state: latest
+
+- name: Optional Tasks
+  hosts: webservers, nfs, db
+  user: ec2-user  
+  become: yes
+  become_method: sudo
+  become_user: root
+  
+  tasks:
+    - name: create a sample directory
+      file:
+      path: /home/sample
+      state: directory
+
+    - name: Install Git
+      yum:
+        name: git
+        state: latest
+
+    - name: create a file
+      file:
+      path: /home/sample/sample.txt
+      state: directory
+      
+  - name: set timezone
+    timezone:
+      name: Africa/Lagos
