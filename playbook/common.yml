@@ -35,8 +35,8 @@
   tasks:
     - name: create a sample directory
       file:
-      path: /home/sample
-      state: directory
+        path: /home/sample
+        state: directory
 
     - name: Install Git
       yum:
@@ -45,8 +45,8 @@
 
     - name: create a file
       file:
-      path: /home/sample/sample.txt
-      state: directory
+        path: /home/sample/sample.txt
+        state: directory
 
     - name: set timezone
       timezone:
