@@ -27,11 +27,11 @@
 
 - name: Optional Tasks
   hosts: webservers, nfs, db
-  user: ec2-user  
+  user: ec2-user
   become: yes
   become_method: sudo
   become_user: root
-  
+
   tasks:
     - name: create a sample directory
       file:
@@ -47,7 +47,7 @@
       file:
       path: /home/sample/sample.txt
       state: directory
-      
-  - name: set timezone
-    timezone:
-      name: Africa/Lagos
+
+    - name: set timezone
+      timezone:
+        name: Africa/Lagos
