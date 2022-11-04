@@ -13,7 +13,6 @@
   when: ansible_os_family == 'RedHat' or ansible_os_family == 'Rocky'
 
 - include_tasks: setup-Ubuntu.yml
-  become: true
   when: ansible_distribution == 'Ubuntu'
 
 - include_tasks: setup-Debian.yml
