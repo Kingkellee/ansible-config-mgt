@@ -1,11 +1,11 @@
 ---
 # Variable setup.
 - name: Include OS-specific variables.
-  include_vars: "{{ ansible_os_family }}.yml"
+  include_vars: '{{ ansible_os_family }}.yml'
 
 - name: Define nginx_user.
   set_fact:
-    nginx_user: "{{ __nginx_user }}"
+    nginx_user: '{{ __nginx_user }}'
   when: nginx_user is not defined
 
 # Setup/install tasks.
@@ -13,6 +13,7 @@
   when: ansible_os_family == 'RedHat' or ansible_os_family == 'Rocky'
 
 - include_tasks: setup-Ubuntu.yml
+  become: true
   when: ansible_distribution == 'Ubuntu'
 
 - include_tasks: setup-Debian.yml
@@ -33,10 +34,10 @@
 # Nginx setup.
 - name: Copy nginx configuration in place.
   template:
-    src: "{{ nginx_conf_template }}"
-    dest: "{{ nginx_conf_file_path }}"
+    src: '{{ nginx_conf_template }}'
+    dest: '{{ nginx_conf_file_path }}'
     owner: root
-    group: "{{ root_group }}"
+    group: '{{ root_group }}'
     mode: 0644
   notify:
     - reload nginx
@@ -44,5 +45,5 @@
 - name: Ensure nginx service is running as configured.
   service:
     name: nginx
-    state: "{{ nginx_service_state }}"
-    enabled: "{{ nginx_service_enabled }}"
+    state: '{{ nginx_service_state }}'
+    enabled: '{{ nginx_service_enabled }}'
