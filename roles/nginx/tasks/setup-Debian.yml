@@ -4,7 +4,8 @@
   changed_when: false
 
 - name: Ensure nginx is installed.
+  become: true
   apt:
-    name: "{{ nginx_package_name }}"
+    name: '{{ nginx_package_name }}'
     state: present
-    default_release: "{{ nginx_default_release }}"
+    default_release: '{{ nginx_default_release }}'
