@@ -1,6 +1,5 @@
 ---
 - name: Ensure nginx is installed.
-  become: true
   pacman:
     name: '{{ nginx_package_name }}'
     state: present
