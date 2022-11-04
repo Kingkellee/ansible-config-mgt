@@ -44,7 +44,6 @@
   when: apache_create_vhosts | bool
 
 - name: Add vhost symlink in sites-enabled.
-  become: true
   file:
     src: '{{ apache_conf_path }}/sites-available/{{ apache_vhosts_filename }}'
     dest: '{{ apache_conf_path }}/sites-enabled/{{ apache_vhosts_filename }}'
@@ -54,7 +53,6 @@
   when: apache_create_vhosts | bool
 
 - name: Remove default vhost in sites-enabled.
-  become: true
   file:
     path: '{{ apache_conf_path }}/sites-enabled/{{ apache_default_vhost_filename }}'
     state: absent
