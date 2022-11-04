@@ -12,7 +12,7 @@
 
 - hosts: db
 - name: database mysql configuration
-  import_playbook: ../static-assignments/mysql-deploy.yml
+  import_playbook: ../static-assignments/mysql-database.yml
 
 - name: Loadbalancers assignment
   hosts: lb
