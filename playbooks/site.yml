@@ -14,7 +14,7 @@
 - name: database mysql configuration
   import_playbook: ../static-assignments/mysql-database.yml
 
-- hosts: lb
+- hosts: nginx
 - name: Loadbalancers assignment
   import_playbook: ../static-assignments/loadbalancers.yml
   when: load_balancer_is_required
