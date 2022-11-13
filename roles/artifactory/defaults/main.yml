@@ -36,12 +36,12 @@ artifactory_flavour: pro
 artifactory_extra_java_opts: -server -Xms512m -Xmx2g -Xss256k -XX:+UseG1GC
 artifactory_system_yaml_template: system.yaml.j2
 artifactory_tar_file_name: jfrog-artifactory-pro-{{ artifactory_version }}-linux.tar.gz
-artifactory_home: "{{ jfrog_home_directory }}/artifactory"
+artifactory_home: '{{ jfrog_home_directory }}/artifactory'
 artifactory_tar: https://releases.jfrog.io/artifactory/artifactory-pro/org/artifactory/pro/jfrog-artifactory-pro/{{ artifactory_version }}/{{ artifactory_tar_file_name }}
-artifactory_untar_home: "{{ jfrog_home_directory }}/artifactory-{{ artifactory_flavour }}-{{ artifactory_version }}"
+artifactory_untar_home: '{{ jfrog_home_directory }}/artifactory-{{ artifactory_flavour }}-{{ artifactory_version }}'
 
 # Timeout in seconds for URL request
-artifactory_download_timeout: 10
+artifactory_download_timeout: 100
 
 postgres_driver_version: 42.2.23
 postgres_driver_download_url: https://repo1.maven.org/maven2/org/postgresql/postgresql/{{ postgres_driver_version }}/postgresql-{{ postgres_driver_version }}.jar
