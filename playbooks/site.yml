@@ -14,7 +14,6 @@
 # - name: database mysql configuration
 #   import_playbook: ../static-assignments/mysql-database.yml
 
-<<<<<<< HEAD
 # - hosts: nginx
 # - name: Loadbalancers assignment
 #   import_playbook: ../static-assignments/loadbalancers.yml
@@ -23,9 +22,3 @@
 - hosts: artifactory
 - name: artifactory assignment
   ansible.builtin.import_playbook: ../static-assignments/artifactory.yml
-=======
-- hosts: nginx
-- name: Loadbalancers assignment
-  import_playbook: ../static-assignments/loadbalancers.yml
-  when: load_balancer_is_required
->>>>>>> 6401e27d98676052e476dc5cd8f6d56069f1cc3a
