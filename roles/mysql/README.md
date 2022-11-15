@@ -41,7 +41,7 @@ mysql_root_password_update: false
 
 Whether to force update the MySQL root user's password. By default, this role will only change the root user's password when MySQL is first configured. You can force an update by setting this to `yes`.
 
-> Note: If you get an error like `ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)` after a failed or interrupted playbook run, this usually means the root password wasn't originally updated to begin with. Try either removing  the `.my.cnf` file inside the configured `mysql_user_home` or updating it and setting `password=''` (the insecure default password). Run the playbook again, with `mysql_root_password_update` set to `yes`, and the setup should complete.
+> Note: If you get an error like `ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)` after a failed or interrupted playbook run, this usually means the root password wasn't originally updated to begin with. Try either removing the `.my.cnf` file inside the configured `mysql_user_home` or updating it and setting `password=''` (the insecure default password). Run the playbook again, with `mysql_root_password_update` set to `yes`, and the setup should complete.
 
 > Note: If you get an error like `ERROR 1698 (28000): Access denied for user 'root'@'localhost' (using password: YES)` when trying to log in from the CLI you might need to run as root or sudoer.
 
@@ -84,13 +84,13 @@ mysql_users: []
 
 The MySQL users and their privileges. A user has the values:
 
-  - `name`
-  - `host` (defaults to `localhost`)
-  - `password` (can be plaintext or encrypted—if encrypted, set `encrypted: yes`)
-  - `encrypted` (defaults to `no`)
-  - `priv` (defaults to `*.*:USAGE`)
-  - `append_privs` (defaults to `no`)
-  - `state`  (defaults to `present`)
+- `name`
+- `host` (defaults to `localhost`)
+- `password` (can be plaintext or encrypted—if encrypted, set `encrypted: yes`)
+- `encrypted` (defaults to `no`)
+- `priv` (defaults to `*.*:USAGE`)
+- `append_privs` (defaults to `no`)
+- `state` (defaults to `present`)
 
 The formats of these are the same as in the `mysql_user` module.
 
@@ -103,7 +103,7 @@ mysql_packages:
 (OS-specific, RedHat/CentOS defaults listed here) Packages to be installed. In some situations, you may need to add additional packages, like `mysql-devel`.
 
 ```yaml
-mysql_enablerepo: ""
+mysql_enablerepo: ''
 ```
 
 (RedHat/CentOS only) If you have enabled any additional repositories (might I suggest geerlingguy.repo-epel or geerlingguy.repo-remi), those repositories can be listed under this variable (e.g. `remi,epel`). This can be handy, as an example, if you want to install later versions of MySQL.
@@ -124,7 +124,7 @@ mysql_pid_file: *default value depends on OS*
 
 Default MySQL connection configuration.
 
-```yaml
+````yaml
 mysql_log_file_group: mysql *adm on Debian*
 mysql_log: ""
 mysql_log_error: *default value depends on OS*
@@ -137,24 +137,23 @@ MySQL logging configuration. Setting `mysql_log` (the general query log) or `mys
 mysql_slow_query_log_enabled: false
 mysql_slow_query_log_file: *default value depends on OS*
 mysql_slow_query_time: 2
-```
+````
 
 Slow query log settings. Note that the log file will be created by this role, but if you're running on a server with SELinux or AppArmor, you may need to add this path to the allowed paths for MySQL, or disable the mysql profile. For example, on Debian/Ubuntu, you can run `sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/usr.sbin.mysqld && sudo service apparmor restart`.
 
 ```yaml
-mysql_key_buffer_size: "256M"
-mysql_max_allowed_packet: "64M"
-mysql_table_open_cache: "256"
-...
+mysql_key_buffer_size: '256M'
+mysql_max_allowed_packet: '64M'
+mysql_table_open_cache: '256'
 ```
 
 The rest of the settings in `defaults/main.yml` control MySQL's memory usage and some other common settings. The default values are tuned for a server where MySQL can consume 512 MB RAM, so you should consider adjusting them to suit your particular server better.
 
 ```yaml
-mysql_server_id: "1"
-mysql_max_binlog_size: "100M"
-mysql_binlog_format: "ROW"
-mysql_expire_logs_days: "10"
+mysql_server_id: '1'
+mysql_max_binlog_size: '100M'
+mysql_binlog_format: 'ROW'
+mysql_expire_logs_days: '10'
 mysql_replication_role: ''
 mysql_replication_master: ''
 mysql_replication_user: {}
@@ -169,22 +168,22 @@ Replication settings. Set `mysql_server_id` and `mysql_replication_role` by serv
 If you want to install MySQL from the official repository instead of installing the system default MariaDB equivalents, you can add the following `pre_tasks` task in your playbook:
 
 ```yaml
-  pre_tasks:
-    - name: Install the MySQL repo.
-      yum:
-        name: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
-        state: present
-      when: ansible_os_family == "RedHat"
-  
-    - name: Override variables for MySQL (RedHat).
-      set_fact:
-        mysql_daemon: mysqld
-        mysql_packages: ['mysql-server']
-        mysql_log_error: /var/log/mysqld.err
-        mysql_syslog_tag: mysqld
-        mysql_pid_file: /var/run/mysqld/mysqld.pid
-        mysql_socket: /var/lib/mysql/mysql.sock
-      when: ansible_os_family == "RedHat"
+pre_tasks:
+  - name: Install the MySQL repo.
+    yum:
+      name: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+      state: present
+    when: ansible_os_family == "RedHat"
+
+  - name: Override variables for MySQL (RedHat).
+    set_fact:
+      mysql_daemon: mysqld
+      mysql_packages: ['mysql-server']
+      mysql_log_error: /var/log/mysqld.err
+      mysql_syslog_tag: mysqld
+      mysql_pid_file: /var/run/mysqld/mysqld.pid
+      mysql_socket: /var/lib/mysql/mysql.sock
+    when: ansible_os_family == "RedHat"
 ```
 
 ### MariaDB usage
@@ -213,7 +212,7 @@ None.
       roles:
         - { role: geerlingguy.mysql }
 
-*Inside `vars/main.yml`*:
+_Inside `vars/main.yml`_:
 
     mysql_root_password: super-secure-password
     mysql_databases:
@@ -232,4 +231,4 @@ MIT / BSD
 
 ## Author Information
 
-This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
+This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/)..
