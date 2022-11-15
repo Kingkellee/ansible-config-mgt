@@ -46,6 +46,8 @@ mysql_sql_mode: ~
 # mysql_pid_file: /var/run/mysqld/mysqld.pid
 # mysql_socket: /var/lib/mysql/mysql.sock
 
+mysql_disable_log_bin: false
+
 # Log file settings.
 mysql_log_file_group: mysql
 
