@@ -1,7 +1,5 @@
-- hosts: sonarqube
-  tasks:
-    - import_role:
-        name: community.postgresql
+- import_role:
+    name: community.postgresql
 
 - name: add PostgreSQL repo to the repo list
   ansible.builtin.lineinfile:
