@@ -34,17 +34,19 @@
 
 - name: Create a new database sonarqubedb
   become_user: postgres
-  postgresql.postgresql_db:
-      name: sonarqube
-      encoding: UTF-8
+  import_role: postgresql.postgresql_db
+  post_tasks:
+    name: sonarqube
+    encoding: UTF-8
 
-   
+  
 
 - name: Create user sonarqube
   become_user: postgres
-  postgresql.postgresql_user:
+  import_role: postgresql.postgresql_user
+  post_tasks:
     db: sonarqube
     name: sonar
     password: sonar
     priv: "ALL"
-   
+  
