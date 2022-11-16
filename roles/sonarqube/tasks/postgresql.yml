@@ -1,5 +1,5 @@
-- import_role:
-    name: postgresql
+# - import_role:
+#     name: postgresql
 
 - name: add PostgreSQL repo to the repo list
   ansible.builtin.lineinfile:
@@ -34,7 +34,7 @@
 
 - name: Create a new database sonarqubedb
   become_user: postgres
-  - postgresql.postgresql_db:
+  - import_role: postgresql.postgresql_db:
       name: sonarqube
       encoding: UTF-8
 
@@ -42,9 +42,9 @@
 
 - name: Create user sonarqube
   become_user: postgres
-  postgresql.postgresql_user:
-    db: sonarqube
-    name: sonar
-    password: sonar
-    priv: "ALL"
-   
+  - import_role: postgresql.postgresql_user:
+      db: sonarqube
+      name: sonar
+      password: sonar
+      priv: "ALL"
+    
