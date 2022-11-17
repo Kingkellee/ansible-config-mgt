@@ -1,6 +1,3 @@
-# - import_role:
-#     name: postgresql
-
 - name: add PostgreSQL repo to the repo list
   ansible.builtin.lineinfile:
     path: /etc/apt/sources.list.d/pgdg.list
@@ -34,19 +31,16 @@
 
 - name: Create a new database sonarqubedb
   become_user: postgres
-  import_role: postgresql.postgresql_db
-  post_tasks:
+  community.postgresql.postgresql_db:
     name: sonarqube
     encoding: UTF-8
 
-  
+   
 
 - name: Create user sonarqube
   become_user: postgres
-  import_role: postgresql.postgresql_user
-  post_tasks:
+  community.postgresql.postgresql_user:
     db: sonarqube
     name: sonar
     password: sonar
     priv: "ALL"
-  
