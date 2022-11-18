@@ -27,6 +27,6 @@
 - name: Deploy Todo Application
   import_playbook: ../static-assignments/deployment.yml
 
-- hosts: sonar
-- name: sonar assignment
-  import_playbook: ../static-assignments/sonar.yml
+# - hosts: sonar
+# - name: sonar assignment
+#   import_playbook: ../static-assignments/sonar.yml
